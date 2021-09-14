@@ -23,7 +23,7 @@ exports.signup = (req, res, next) => {
     })
     .catch(error => res.status(500).json({ error }))
   } else if(!schema.validate(req.body.password)) {
-    return res.status(400).json({ error: 'Format de mot de passe incorrect : doit contenir au minimum 5 caractères dont 1 chiffre et une majuscule, sans espace' });
+    return res.status(400).json({ error });
   }
 };
 
@@ -31,12 +31,12 @@ exports.signup = (req, res, next) => {
     User.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
-          return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+          return res.status(401).json({ error });
         }
         bcrypt.compare(req.body.password, user.password)
           .then(valid => {
             if (!valid) {
-              return res.status(401).json({ error: 'Mot de passe incorrect !' });
+              return res.status(401).json({ error });
             }
             res.status(200).json({
               userId: user._id,

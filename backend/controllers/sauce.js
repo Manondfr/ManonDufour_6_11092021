@@ -43,7 +43,7 @@ exports.defineLikeStatus = (req, res, next) => {
             sauce.update( { $inc: { likes: -1}, $pull: { usersLiked: req.body.userId }, _id: req.params.id } )
             .then(
               () => {
-                res.status(200).json({ message: 'Like annulé'});
+                res.status(200).json({ message: 'Like canceled'});
               }
             )
             .catch(
@@ -57,7 +57,7 @@ exports.defineLikeStatus = (req, res, next) => {
             sauce.update({ $inc: { dislikes: -1}, $pull: { usersDisliked: req.body.userId }, _id: req.params.id })
             .then(
               () => {
-                res.status(200).json({ message: 'Dislike annulé'});
+                res.status(200).json({ message: 'Dislike canceled'});
               }
             )
             .catch(
@@ -72,7 +72,7 @@ exports.defineLikeStatus = (req, res, next) => {
       )
       .catch(
         (error) => {
-          res.status(404.).json({
+          res.status(404).json({
             error: error
           })
         }
@@ -92,7 +92,7 @@ exports.createSauce = (req, res, next) => {
     .then(
         () => {
             res.status(201).json({
-              message: 'Post saved successfully!'
+              message: 'Sauce saved successfully!'
             });
           }
     )
@@ -158,7 +158,7 @@ exports.getAllSauces = (req, res, next) => {
     )
     .catch(    
         (error) => {
-        res.status(400).json({
+        res.status(404).json({
           error: error
         });
       }
