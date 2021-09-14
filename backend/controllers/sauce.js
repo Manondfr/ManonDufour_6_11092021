@@ -14,7 +14,7 @@ exports.defineLikeStatus = (req, res, next) => {
     )
     .catch(
       (error) => {
-        res.status(404).json({
+        res.status(400).json({
           error: error
         });
       }
@@ -43,13 +43,12 @@ exports.defineLikeStatus = (req, res, next) => {
             sauce.update( { $inc: { likes: -1}, $pull: { usersLiked: req.body.userId }, _id: req.params.id } )
             .then(
               () => {
-                console.log('blabla');
                 res.status(200).json({ message: 'Like annulé'});
               }
             )
             .catch(
               (error) => {
-                res.status(404.).json({
+                res.status(400).json({
                   error: error
                 })
               }
@@ -58,14 +57,12 @@ exports.defineLikeStatus = (req, res, next) => {
             sauce.update({ $inc: { dislikes: -1}, $pull: { usersDisliked: req.body.userId }, _id: req.params.id })
             .then(
               () => {
-                console.log('blobla');
-
                 res.status(200).json({ message: 'Dislike annulé'});
               }
             )
             .catch(
               (error) => {
-                res.status(404.).json({
+                res.status(400).json({
                   error: error
                 })
               }
