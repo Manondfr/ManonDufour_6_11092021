@@ -1,3 +1,7 @@
+const dotenv = require('dotenv');
+dotenv.config();
+const MONGODB_STRING = process.env.MONGODB_STRING;
+
 const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
@@ -6,7 +10,7 @@ const path = require('path');
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
-mongoose.connect('mongodb+srv://UserP6:UserP6@clusteropcr.sarq5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(MONGODB_STRING,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
