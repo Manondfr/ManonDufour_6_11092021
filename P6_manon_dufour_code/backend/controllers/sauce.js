@@ -133,7 +133,7 @@ exports.updateSauce = (req, res, next) => {
   .then(sauce => {
     const filename = sauce.imageUrl.split('/images/')[1];
     fs.unlink(`images/${filename}`, () => {
-      sauce.update({ ...sauceObject, _id: req.params.id })
+      Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
       .then(
         () => res.status(200).json({ message: 'Objet modifié !'}))
       .catch(
